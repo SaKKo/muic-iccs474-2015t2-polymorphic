@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Financers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @financers.each do |financer| %>
+      <tr>
+        <td><%= financer.name %></td>
+        <td><%= link_to 'Show', financer %></td>
+        <td><%= link_to 'Edit', edit_financer_path(financer) %></td>
+        <td><%= link_to 'Destroy', financer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Financer', new_financer_path %>

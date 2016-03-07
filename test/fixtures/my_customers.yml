@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: MyText
+  tradeable_id: 1
+  tradeable_type: MyText
+
+two:
+  number: MyText
+  tradeable_id: 1
+  tradeable_type: MyText

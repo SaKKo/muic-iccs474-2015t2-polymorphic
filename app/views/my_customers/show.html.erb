@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @my_customer.number %>
+</p>
+
+<p>
+  <strong>Tradeable:</strong>
+  <%= @my_customer.tradeable_id %>
+</p>
+
+<p>
+  <strong>Tradeable type:</strong>
+  <%= @my_customer.tradeable_type %>
+</p>
+
+<%= link_to 'Edit', edit_my_customer_path(@my_customer) %> |
+<%= link_to 'Back', my_customers_path %>

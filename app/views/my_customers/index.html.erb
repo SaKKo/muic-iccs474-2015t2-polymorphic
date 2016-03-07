@@ -2,12 +2,18 @@
 
 <h1>Listing My Customers</h1>
 
+<%# link_to 'New My customer', new_my_customer_path %>
+<%= link_to "New Company", new_company_path %>
+<%= link_to "New Individual", new_individual_path %>
+<%= link_to "New Financer", new_financer_path %>
+
 <table>
   <thead>
     <tr>
       <th>Number</th>
       <th>Tradeable</th>
       <th>Tradeable type</th>
+      <th>Description</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,6 +24,7 @@
         <td><%= my_customer.number %></td>
         <td><%= my_customer.tradeable_id %></td>
         <td><%= my_customer.tradeable_type %></td>
+        <td><%= my_customer.tradeable.description %></td>
         <td><%= link_to 'Show', my_customer %></td>
         <td><%= link_to 'Edit', edit_my_customer_path(my_customer) %></td>
         <td><%= link_to 'Destroy', my_customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -27,5 +34,3 @@
 </table>
 
 <br>
-
-<%= link_to 'New My customer', new_my_customer_path %>

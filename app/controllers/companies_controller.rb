@@ -24,10 +24,18 @@ class CompaniesController < ApplicationController
   # POST /companies
   # POST /companies.json
   def create
-    @company = Company.new(company_params)
+    saved = false
+    begin
+      ActiveRecord::Base.transaction do
+        @company = Company.new(company_params)
+        @company.save!
+        saved = true
+      end
+    rescue ActiveRecord::RecordInvalid
+    end
 
     respond_to do |format|
-      if @company.save
+      if saved
         format.html { redirect_to @company, notice: 'Company was successfully created.' }
         format.json { render :show, status: :created, location: @company }
       else

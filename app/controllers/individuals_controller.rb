@@ -24,10 +24,18 @@ class IndividualsController < ApplicationController
   # POST /individuals
   # POST /individuals.json
   def create
-    @individual = Individual.new(individual_params)
+    saved = false
+    begin
+      ActiveRecord::Base.transaction do
+        @individual = Individual.new(individual_params)
+        @individual.save!
+        saved = true
+      end
+    rescue ActiveRecord::RecordInvalid
+    end
 
     respond_to do |format|
-      if @individual.save
+      if saved
         format.html { redirect_to @individual, notice: 'Individual was successfully created.' }
         format.json { render :show, status: :created, location: @individual }
       else

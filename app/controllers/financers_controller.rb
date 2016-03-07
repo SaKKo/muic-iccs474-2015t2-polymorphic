@@ -24,10 +24,18 @@ class FinancersController < ApplicationController
   # POST /financers
   # POST /financers.json
   def create
-    @financer = Financer.new(financer_params)
+    saved = false
+    begin
+      ActiveRecord::Base.transaction do
+        @financer = Financer.new(financer_params)
+        @financer.save!
+        saved = true
+      end
+    rescue ActiveRecord::RecordInvalid
+    end
 
     respond_to do |format|
-      if @financer.save
+      if saved
         format.html { redirect_to @financer, notice: 'Financer was successfully created.' }
         format.json { render :show, status: :created, location: @financer }
       else

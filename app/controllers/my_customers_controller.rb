@@ -15,10 +15,19 @@ class MyCustomersController < ApplicationController
   # GET /my_customers/new
   def new
     @my_customer = MyCustomer.new
+    @company = Company.new
+    @financer = Financer.new
+    @individual = Individual.new
   end
 
   # GET /my_customers/1/edit
   def edit
+    @company = @my_customer.tradeable if @my_customer.tradeable.class == Company
+    @company ||= Company.new
+    @financer = @my_customer.tradeable if @my_customer.tradeable.class == Financer
+    @financer ||= Financer.new
+    @individual = @my_customer.tradeable if @my_customer.tradeable.class == Individual
+    @individual ||= Individual.new
   end
 
   # POST /my_customers

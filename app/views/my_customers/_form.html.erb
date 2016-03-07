@@ -1,29 +1,38 @@
 <%= form_for(@my_customer) do |f| %>
-  <% if @my_customer.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@my_customer.errors.count, "error") %> prohibited this my_customer from being saved:</h2>
-
-      <ul>
-      <% @my_customer.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="field">
     <%= f.label :number %><br>
     <%= f.text_area :number %>
   </div>
   <div class="field">
-    <%= f.label :tradeable_id %><br>
-    <%= f.number_field :tradeable_id %>
-  </div>
-  <div class="field">
     <%= f.label :tradeable_type %><br>
-    <%= f.text_area :tradeable_type %>
+    <%= f.select :tradeable_type, MyCustomer::TRADEABLE_TYPES %>
+  </div>
+  <div id="tradeable-form">
+
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+<script>
+  var company_form = "<%= escape_javascript(render 'companies/partial_form') %>"
+  var financer_form = "<%= escape_javascript(render 'financers/partial_form') %>"
+  var individual_form = "<%= escape_javascript(render 'individuals/partial_form') %>"
+  var tradeable_type_changed = function(type){
+    if (type == "Company") {
+      $('#tradeable-form').html(company_form)
+    } else if (type == "Individual") {
+      $('#tradeable-form').html(individual_form)
+    } else if (type == "Financer") {
+      $('#tradeable-form').html(financer_form)
+    } else {
+      $('#tradeable-form').html("")
+    }
+  }
+  tradeable_type_changed($("#my_customer_tradeable_type").val())
+  $("#my_customer_tradeable_type").on('change',function(){
+    var current_type = $(this).val();
+    tradeable_type_changed(current_type)
+  })
+</script>

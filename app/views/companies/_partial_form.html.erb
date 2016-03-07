@@ -1,0 +1,11 @@
+<%# companies/partial_form %>
+<%= fields_for(@company) do |f| %>
+  <div class="field">
+    <%= f.label :tax_number %><br>
+    <%= f.text_area :tax_number %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_area :name %>
+  </div>
+<% end %>
